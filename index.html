@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #a {
+            width: 350px;
+            margin: 20px auto;
+        }
+
+        .bar {
+            width: 400px;
+            height: 400px;
+            margin: 0px auto;
+            background: gray;
+            overflow: hidden;
+            position: relative;
+
+        }
+
+        .inside {
+            width: 400px;
+            height: 400px;
+            margin: 0px auto;
+
+            position: absolute;
+        }
+
+
+
+
+
+        .in2 {
+            width: 400px;
+            height: 400px;
+            margin: 0px auto;
+            top: 0px;
+            left: 400px;
+            position: absolute;
+
+
+        }
+
+        .numberrr {
+            text-align: center;
+            font-size: 50px;
+            line-height: 400px;
+        }
+
+        #ans {
+            margin: 0px auto;
+        }
+
+        #spaceee {
+            margin: 0px auto;
+        }
+
+        #bbb {
+            margin: 0px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="input-group" id="a">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="addon-wrapping">最小值</span>
+        </div>
+        <input type="text" id="little" class="form-control" aria-label="Username" aria-describedby="addon-wrapping">
+        <div class="input-group-prepend ml-5">
+            <span class="input-group-text" id="addon-wrapping">最大值</span>
+        </div>
+        <input type="text" id="big" class="form-control" aria-label="Username" aria-describedby="addon-wrapping">
+    </div>
+    <div class="row mt-3 mb-3" id="spaceee">
+
+        <h1 id="ans">取出的是:</h1>
+
+    </div>
+    <div class="bar">
+        <div class="inside">
+
+        </div>
+    </div>
+    <div class="row mt-5">
+        <button type="button" id="bbb" class="btn btn-primary btn-lg">GO!</button>
+    </div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            function getRandom(minNum, maxNum) {
+                return Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
+            }
+            function getRandomArray(minNum, maxNum, n) {	//隨機產生不重覆的n個數字
+                var rdmArray = [n];		//儲存產生的陣列
+                for (var i = 0; i < n; i++) {
+                    var rdm = 0;		//暫存的亂數
+                    do {
+                        var exist = false;			//此亂數是否已存在
+                        rdm = getRandom(minNum, maxNum);	//取得亂數
+
+                        //檢查亂數是否存在於陣列中，若存在則繼續回圈
+                        if (rdmArray.indexOf(rdm) != -1) exist = true;
+
+                    } while (exist);	//產生沒出現過的亂數時離開迴圈
+
+                    rdmArray[i] = rdm;
+                }
+                return rdmArray;
+            }
+            var a = 0;
+            var b = 0;
+            var out;
+            var outarr = [];
+            var ramdommm = [];
+            var reverrr = [];
+
+            $("#bbb").on("click", function () {
+                //var arr = new Array()
+                var little = $("#little").val();
+                var big = $("#big").val();
+                var total = parseInt(big) - parseInt(little) + 1;
+
+                if (little == "" || big == "") {
+                    a = 0;
+                    alert("請輸入數字");
+                } else if (a == 0) {
+                    if (b == 0) {
+                        ramdommm = getRandomArray(parseInt(little), parseInt(big), total);
+                        console.info(ramdommm + "aaaaaa");  //  1
+                        reverrr = ramdommm.reverse();
+
+                        //顯示 疊加  !!!!!!!!!!!!!!!!!!!!!!
+                        //reverrr = ramdommm.reverse();      
+                        console.info(reverrr);   // 2
+
+                        //$(".inside").append("<div class='in2'><h1 class='numberrr'>" + out + "</h1></div>");
+
+                        for (var i = 0; i < ramdommm.length; i++) {
+                            $(".inside").append("<div class='in2' id='" + i + "' style='left:" + i * 400 + "px'><h1 class='numberrr'>" + reverrr[i] + "</h1></div>");
+
+                        }//+id
+
+                        // (ramdommm.length-1)*400 為一單位
+
+                        //ramdommm 12345
+                        //reverrr  54321
+                        //顯示  5      4    3    2  1
+                        if (outarr[length - 1] == reverrr[length - 1]) {
+                            $(".inside").animate({ right: (ramdommm.length - 1) * 400 }, 2000);
+                            console.info(reverrr.length * 400);   //3
+                        }
+
+                        out = ramdommm.pop();
+                        outarr.push(out);
+
+                        console.info(outarr);      //4
+                        //console.info(reverrr);
+                        $("#ans").html("取出的是:" + outarr);
+                        a = 1;
+                        b = 1;
+                    } else if (b == 1) {
+
+                        if (outarr[length - 1] == reverrr[length - 1]) {
+                            $(".inside").css("right", "0px");
+                            $(".inside").animate({ right: (ramdommm.length - 1) * 400 }, 2000);
+                            console.info((ramdommm.length) * 400);  //2-1
+                        }
+
+                        console.info(ramdommm + "bbb");      //2-2
+                        out = ramdommm.pop();
+                        outarr.push(out);   //顯示 疊加
+
+
+                        console.info(outarr);     //2-3
+                        $("#ans").html("取出的是:" + outarr);
+                    }
+                }
+                $("#big").on("change", function () {
+                    ramdommm = [];
+                    outarr = [];
+                    reverrr = [];
+                    ramdommm = getRandomArray(parseInt(little), parseInt(big), total);
+                    $("#ans").html("取出的是: ");
+                    $(".inside").empty();
+                    a = 0;
+                    b = 0;
+                })
+                $("#little").on("change", function () {
+                    ramdommm = [];
+                    outarr = [];
+                    reverrr = [];
+                    ramdommm = getRandomArray(parseInt(little), parseInt(big), total);
+                    $("#ans").html("取出的是: ");
+                    $(".inside").empty();
+                    a = 0;
+                    b = 0;
+                })
+                a = 0;
+                //console.info(a);
+
+            })
+        })
+    </script>
+</body>
+
+</html>
