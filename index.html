@@ -8,9 +8,22 @@
     <title>Document</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        body {
+
+            background: -webkit-radial-gradient(circle, white, black);
+            background: -o-radial-gradient(circle, white, black);
+            background: -moz-radial-gradient(circle, white, black);
+            background: radial-gradient(circle, white, black);
+        }
+
+        .container {
+            width:500px;
+        }
+
         #a {
             width: 350px;
             margin: 20px auto;
+
         }
 
         .bar {
@@ -31,10 +44,6 @@
             position: absolute;
         }
 
-
-
-
-
         .in2 {
             width: 400px;
             height: 400px;
@@ -42,13 +51,14 @@
             top: 0px;
             left: 400px;
             position: absolute;
-
+            border: 2px;
+            border-style: solid;
 
         }
 
         .numberrr {
             text-align: center;
-            font-size: 50px;
+            font-size: 100px;
             line-height: 400px;
         }
 
@@ -57,7 +67,9 @@
         }
 
         #spaceee {
+            width: 400px;
             margin: 0px auto;
+            background-color: white;
         }
 
         #bbb {
@@ -67,29 +79,33 @@
 </head>
 
 <body>
-    <div class="input-group" id="a">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="addon-wrapping">最小值</span>
+    <div class="container">
+        <div class="input-group mt-5" id="a">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping">最小值</span>
+            </div>
+            <input type="text" id="little" class="form-control" aria-label="Username" aria-describedby="addon-wrapping">
+            <div class="input-group-prepend ml-5">
+                <span class="input-group-text" id="addon-wrapping">最大值</span>
+            </div>
+            <input type="text" id="big" class="form-control" aria-label="Username" aria-describedby="addon-wrapping">
         </div>
-        <input type="text" id="little" class="form-control" aria-label="Username" aria-describedby="addon-wrapping">
-        <div class="input-group-prepend ml-5">
-            <span class="input-group-text" id="addon-wrapping">最大值</span>
-        </div>
-        <input type="text" id="big" class="form-control" aria-label="Username" aria-describedby="addon-wrapping">
-    </div>
-    <div class="row mt-3 mb-3" id="spaceee">
+        
+        <div class="row mt-3 " id="spaceee">
 
-        <h1 id="ans">取出的是:</h1>
-
-    </div>
-    <div class="bar">
-        <div class="inside">
+            <h1 id="ans">取出:</h1>
 
         </div>
+        <div class="bar">
+            <div class="inside">
+
+            </div>
+        </div>
+        <div class="row mt-5">
+            <button type="button" id="bbb" class="btn btn-primary btn-lg">GO!</button>
+        </div>
     </div>
-    <div class="row mt-5">
-        <button type="button" id="bbb" class="btn btn-primary btn-lg">GO!</button>
-    </div>
+
 
 
 
@@ -146,7 +162,7 @@
                         //$(".inside").append("<div class='in2'><h1 class='numberrr'>" + out + "</h1></div>");
 
                         for (var i = 0; i < ramdommm.length; i++) {
-                            $(".inside").append("<div class='in2' id='" + i + "' style='left:" + i * 400 + "px'><h1 class='numberrr'>" + reverrr[i] + "</h1></div>");
+                            $(".inside").append("<div class='in2' id='" + i + "' style='left:" + i * 400 + "px'><p class='numberrr'>" + reverrr[i] + "</p></div>");
 
                         }//+id
 
@@ -165,7 +181,7 @@
 
                         console.info(outarr);      //4
                         //console.info(reverrr);
-                        $("#ans").html("取出的是:" + outarr);
+                        $("#ans").html("取出:" + outarr);
                         a = 1;
                         b = 1;
                     } else if (b == 1) {
@@ -182,7 +198,7 @@
 
 
                         console.info(outarr);     //2-3
-                        $("#ans").html("取出的是:" + outarr);
+                        $("#ans").html("取出:" + outarr);
                     }
                 }
                 $("#big").on("change", function () {
@@ -190,7 +206,7 @@
                     outarr = [];
                     reverrr = [];
                     ramdommm = getRandomArray(parseInt(little), parseInt(big), total);
-                    $("#ans").html("取出的是: ");
+                    $("#ans").html("取出: ");
                     $(".inside").empty();
                     a = 0;
                     b = 0;
@@ -200,7 +216,7 @@
                     outarr = [];
                     reverrr = [];
                     ramdommm = getRandomArray(parseInt(little), parseInt(big), total);
-                    $("#ans").html("取出的是: ");
+                    $("#ans").html("取出: ");
                     $(".inside").empty();
                     a = 0;
                     b = 0;
